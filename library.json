@@ -12,7 +12,7 @@
   "build": {
     "flags": [
       "-L.",
-      "-leom-hal"
+      "-lm1k-hal"
     ]
   }
 }
