@@ -6,6 +6,11 @@
 
 #include <U8g2lib.h>
 
+#define M1K_HAL_ERRCHK(statement) { \
+    auto __err_ = statement; \
+    if (M1K_HAL_OK != __err_) ESP_LOGE(TAG, "%s returned %s", #statement, m1k_hal_err_str[__err_]); \
+}
+
 //=== COMMON
 
 enum m1k_hal_err {
@@ -39,9 +44,11 @@ enum m1k_hal_button {
 
 typedef enum m1k_hal_button m1k_hal_button_t;
 typedef void (*m1k_hal_button_callback_t)(m1k_hal_button_t, bool);
+typedef void (*m1k_hal_encoder_callback_t)(int);
 
 m1k_hal_err_t m1k_hal_register_button_press(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
 m1k_hal_err_t m1k_hal_register_button_hold(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
+m1k_hal_err_t m1k_hal_register_encoder_change(m1k_hal_encoder_callback_t cb);
 
 
 //=== PRESSURE READING
