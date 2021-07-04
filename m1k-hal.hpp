@@ -53,7 +53,10 @@ m1k_hal_err_t m1k_hal_register_encoder_change(m1k_hal_encoder_callback_t cb);
 
 //=== PRESSURE READING
 
-uint16_t m1k_hal_get_pressure_reading(void);
+/**
+ * Returns current pressure value in approximate kPa
+ */
+double m1k_hal_get_pressure_reading(void);
 
 
 //=== RJ ABSTRACTION
@@ -78,6 +81,13 @@ int m1k_hal_get_display_left(void);
 //=== EEPROM
 
 m1k_hal_err_t m1k_hal_get_device_serial(char *dst, size_t len);
-m1k_hal_err_t m1k_hal_set_device_serial(char *serial);
+
+//=== Milker Control
+
+void m1k_hal_hv_power_on(void);
+void m1k_hal_hv_power_off(void);
+bool m1k_hal_hv_is_on();
+void m1k_hal_set_milker_speed(uint8_t speed);
+uint8_t m1k_hal_get_milker_speed(void);
 
 #endif
