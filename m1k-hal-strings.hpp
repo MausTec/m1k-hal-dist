@@ -25,6 +25,7 @@ static const char *m1k_hal_hardware_type_str[] = {
  */
 static const char *m1k_hal_button_str[] = {
     "M1K_HAL_BUTTON_MENU",
+    "M1K_HAL_BUTTON_BOOT",
 };
 
 /**
@@ -34,6 +35,16 @@ static const char *m1k_hal_accessory_mode_str[] = {
     "M1K_HAL_ACCESSORY_DISABLED",
     "M1K_HAL_ACCESSORY_SOURCE",
     "M1K_HAL_ACCESSORY_TARGET",
+};
+
+/**
+ * Automatically generated string value array for the m1k_hal_air_direction enum.
+ */
+static const char *m1k_hal_air_direction_str[] = {
+    "M1K_HAL_AIR_OUT",
+    "M1K_HAL_AIR_IN",
+    "M1K_HAL_AIR_CLOSED",
+    "M1K_HAL_AIR_CHAOS",
 };
 
 #endif

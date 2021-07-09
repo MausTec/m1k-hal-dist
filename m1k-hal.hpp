@@ -40,6 +40,7 @@ m1k_hal_err_t m1k_hal_deinit(void);
 
 enum m1k_hal_button {
     M1K_HAL_BUTTON_MENU,
+    M1K_HAL_BUTTON_BOOT,
 };
 
 typedef enum m1k_hal_button m1k_hal_button_t;
@@ -89,5 +90,21 @@ void m1k_hal_hv_power_off(void);
 bool m1k_hal_hv_is_on();
 void m1k_hal_set_milker_speed(uint8_t speed);
 uint8_t m1k_hal_get_milker_speed(void);
+
+//=== Pressure Management
+
+enum m1k_hal_air_direction {
+    M1K_HAL_AIR_OUT,
+    M1K_HAL_AIR_IN,
+    M1K_HAL_AIR_CLOSED,
+    M1K_HAL_AIR_CHAOS,
+};
+
+typedef enum m1k_hal_air_direction m1k_hal_air_direction_t;
+
+void m1k_hal_air_out(void);
+void m1k_hal_air_in(void);
+void m1k_hal_air_stop(void);
+m1k_hal_air_direction_t m1k_hal_air_get_direction(void);
 
 #endif
