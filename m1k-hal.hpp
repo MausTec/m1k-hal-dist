@@ -39,16 +39,28 @@ m1k_hal_err_t m1k_hal_deinit(void);
 //=== BUTTONS AND CONTROL
 
 enum m1k_hal_button {
+    M1K_HAL_BUTTON_ANY,
     M1K_HAL_BUTTON_MENU,
     M1K_HAL_BUTTON_BOOT,
+    M1K_HAL_BUTTON_AIROUT,
+    M1K_HAL_BUTTON_AIRIN,
 };
 
 typedef enum m1k_hal_button m1k_hal_button_t;
-typedef void (*m1k_hal_button_callback_t)(m1k_hal_button_t, bool);
+
+enum m1k_hal_button_evt {
+    M1K_HAL_BUTTON_EVT_DOWN,
+    M1K_HAL_BUTTON_EVT_UP,
+    M1K_HAL_BUTTON_EVT_PRESS,
+    M1K_HAL_BUTTON_EVT_HOLD,
+};
+
+typedef enum m1k_hal_button_evt m1k_hal_button_evt_t;
+
+typedef void (*m1k_hal_button_callback_t)(m1k_hal_button_t, m1k_hal_button_evt_t);
 typedef void (*m1k_hal_encoder_callback_t)(int);
 
-m1k_hal_err_t m1k_hal_register_button_press(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
-m1k_hal_err_t m1k_hal_register_button_hold(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
+m1k_hal_err_t m1k_hal_register_button_cb(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
 m1k_hal_err_t m1k_hal_register_encoder_change(m1k_hal_encoder_callback_t cb);
 
 

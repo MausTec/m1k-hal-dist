@@ -24,8 +24,21 @@ static const char *m1k_hal_hardware_type_str[] = {
  * Automatically generated string value array for the m1k_hal_button enum.
  */
 static const char *m1k_hal_button_str[] = {
+    "M1K_HAL_BUTTON_ANY",
     "M1K_HAL_BUTTON_MENU",
     "M1K_HAL_BUTTON_BOOT",
+    "M1K_HAL_BUTTON_AIROUT",
+    "M1K_HAL_BUTTON_AIRIN",
+};
+
+/**
+ * Automatically generated string value array for the m1k_hal_button_evt enum.
+ */
+static const char *m1k_hal_button_evt_str[] = {
+    "M1K_HAL_BUTTON_EVT_DOWN",
+    "M1K_HAL_BUTTON_EVT_UP",
+    "M1K_HAL_BUTTON_EVT_PRESS",
+    "M1K_HAL_BUTTON_EVT_HOLD",
 };
 
 /**
