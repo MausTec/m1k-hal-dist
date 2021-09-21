@@ -46,8 +46,8 @@ static const char *m1k_hal_button_evt_str[] = {
  */
 static const char *m1k_hal_accessory_mode_str[] = {
     "M1K_HAL_ACCESSORY_DISABLED",
-    "M1K_HAL_ACCESSORY_SOURCE",
-    "M1K_HAL_ACCESSORY_TARGET",
+    "M1K_HAL_ACCESSORY_SLAVE",
+    "M1K_HAL_ACCESSORY_MASTER",
 };
 
 /**

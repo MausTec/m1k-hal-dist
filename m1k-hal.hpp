@@ -6,6 +6,7 @@
 
 #include <U8g2lib.h>
 
+
 #define M1K_HAL_ERRCHK(statement) { \
     auto __err_ = statement; \
     if (M1K_HAL_OK != __err_) ESP_LOGE(TAG, "%s returned %s", #statement, m1k_hal_err_str[__err_]); \
@@ -76,11 +77,16 @@ double m1k_hal_get_pressure_reading(void);
 
 enum m1k_hal_accessory_mode {
     M1K_HAL_ACCESSORY_DISABLED,
-    M1K_HAL_ACCESSORY_SOURCE,
-    M1K_HAL_ACCESSORY_TARGET,
+    M1K_HAL_ACCESSORY_SLAVE,
+    M1K_HAL_ACCESSORY_MASTER,
 };
 
 typedef enum m1k_hal_accessory_mode m1k_hal_accessory_mode_t;
+
+m1k_hal_err_t m1k_hal_set_accessory_mode(m1k_hal_accessory_mode_t mode);
+size_t m1k_hal_accessory_read_buffer(char* buffer, size_t buf_len);
+size_t m1k_hal_accessory_write_buffer(char* buffer, size_t buf_len);
+void m1k_hal_accessory_reset_tx_fifo(void);
 
 
 //=== DISPLAY
