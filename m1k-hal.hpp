@@ -105,6 +105,7 @@ m1k_hal_err_t m1k_hal_get_device_serial(char *dst, size_t len);
 
 void m1k_hal_hv_power_on(void);
 void m1k_hal_hv_power_off(void);
+void m1k_hal_set_drive_freq(uint32_t freq_hz);
 bool m1k_hal_hv_is_on();
 void m1k_hal_set_milker_speed(uint8_t speed);
 uint8_t m1k_hal_get_milker_speed(void);
