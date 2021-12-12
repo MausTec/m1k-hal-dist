@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#include <U8g2lib.h>
+#include "u8g2.h"
 
 
 #define M1K_HAL_ERRCHK(statement) { \
@@ -91,8 +91,7 @@ void m1k_hal_accessory_reset_tx_fifo(void);
 
 //=== DISPLAY
 
-typedef U8G2_ST7920_192X32_F_SW_SPI m1k_hal_display_t;
-m1k_hal_display_t *m1k_hal_get_display_ptr(void);
+u8g2_t *m1k_hal_get_display_ptr(void);
 int m1k_hal_get_display_width(void);
 int m1k_hal_get_display_height(void);
 int m1k_hal_get_display_left(void);
@@ -106,7 +105,7 @@ m1k_hal_err_t m1k_hal_get_device_serial(char *dst, size_t len);
 void m1k_hal_hv_power_on(void);
 void m1k_hal_hv_power_off(void);
 void m1k_hal_set_drive_freq(uint32_t freq_hz);
-bool m1k_hal_hv_is_on();
+int m1k_hal_hv_is_on();
 void m1k_hal_set_milker_speed(uint8_t speed);
 uint8_t m1k_hal_get_milker_speed(void);
 
