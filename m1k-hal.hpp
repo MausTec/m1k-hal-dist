@@ -95,6 +95,7 @@ u8g2_t *m1k_hal_get_display_ptr(void);
 int m1k_hal_get_display_width(void);
 int m1k_hal_get_display_height(void);
 int m1k_hal_get_display_left(void);
+void m1k_hal_send_display_screenshot(const char *label);
 
 //=== EEPROM
 
