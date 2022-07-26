@@ -1,6 +1,10 @@
 #ifndef __m1k_hal_hpp
 #define __m1k_hal_hpp
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdint.h>
 #include <stddef.h>
 
@@ -19,6 +23,7 @@ enum m1k_hal_err {
     M1K_HAL_FAIL,
     M1K_HAL_ERR_HARDWARE_LOCKED,
     M1K_HAL_ERR_NO_STORAGE,
+    M1K_HAL_ERR_NO_FEATURE,
 };
 
 typedef enum m1k_hal_err m1k_hal_err_t;
@@ -96,6 +101,7 @@ int m1k_hal_get_display_width(void);
 int m1k_hal_get_display_height(void);
 int m1k_hal_get_display_left(void);
 void m1k_hal_send_display_screenshot(const char *label);
+void m1k_hal_set_display_backlight(uint8_t brightness);
 
 //=== EEPROM
 
@@ -125,5 +131,9 @@ void m1k_hal_air_out(void);
 void m1k_hal_air_in(void);
 void m1k_hal_air_stop(void);
 m1k_hal_air_direction_t m1k_hal_air_get_direction(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
