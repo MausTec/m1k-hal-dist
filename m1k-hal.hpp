@@ -5,31 +5,33 @@
 extern "C" {
 #endif
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
+
 
 #include "u8g2.h"
 
-
-#define M1K_HAL_ERRCHK(statement) { \
-    auto __err_ = statement; \
-    if (M1K_HAL_OK != __err_) ESP_LOGE(TAG, "%s returned %s", #statement, m1k_hal_err_str[__err_]); \
-}
+#define M1K_HAL_ERRCHK(statement)                                              \
+  {                                                                            \
+    auto __err_ = statement;                                                   \
+    if (M1K_HAL_OK != __err_)                                                  \
+      ESP_LOGE(TAG, "%s returned %s", #statement, m1k_hal_err_str[__err_]);    \
+  }
 
 //=== COMMON
 
 enum m1k_hal_err {
-    M1K_HAL_OK,
-    M1K_HAL_FAIL,
-    M1K_HAL_ERR_HARDWARE_LOCKED,
-    M1K_HAL_ERR_NO_STORAGE,
-    M1K_HAL_ERR_NO_FEATURE,
+  M1K_HAL_OK,
+  M1K_HAL_FAIL,
+  M1K_HAL_ERR_HARDWARE_LOCKED,
+  M1K_HAL_ERR_NO_STORAGE,
+  M1K_HAL_ERR_NO_FEATURE,
 };
 
 typedef enum m1k_hal_err m1k_hal_err_t;
 
 enum m1k_hal_hardware_type {
-    M1K_HAL_HARDWARE_TYPE_MERCURY_1000,
+  M1K_HAL_HARDWARE_TYPE_MERCURY_1000,
 };
 
 typedef enum m1k_hal_hardware_type m1k_hal_hardware_type_t;
@@ -41,34 +43,35 @@ m1k_hal_err_t m1k_hal_init(void);
 m1k_hal_err_t m1k_hal_tick(void);
 m1k_hal_err_t m1k_hal_deinit(void);
 
-
 //=== BUTTONS AND CONTROL
 
 enum m1k_hal_button {
-    M1K_HAL_BUTTON_ANY,
-    M1K_HAL_BUTTON_MENU,
-    M1K_HAL_BUTTON_BOOT,
-    M1K_HAL_BUTTON_AIROUT,
-    M1K_HAL_BUTTON_AIRIN,
+  M1K_HAL_BUTTON_ANY,
+  M1K_HAL_BUTTON_MENU,
+  M1K_HAL_BUTTON_BOOT,
+  M1K_HAL_BUTTON_AIROUT,
+  M1K_HAL_BUTTON_AIRIN,
+  M1K_HAL_BUTTON_PAIR,
 };
 
 typedef enum m1k_hal_button m1k_hal_button_t;
 
 enum m1k_hal_button_evt {
-    M1K_HAL_BUTTON_EVT_DOWN,
-    M1K_HAL_BUTTON_EVT_UP,
-    M1K_HAL_BUTTON_EVT_PRESS,
-    M1K_HAL_BUTTON_EVT_HOLD,
+  M1K_HAL_BUTTON_EVT_DOWN,
+  M1K_HAL_BUTTON_EVT_UP,
+  M1K_HAL_BUTTON_EVT_PRESS,
+  M1K_HAL_BUTTON_EVT_HOLD,
 };
 
 typedef enum m1k_hal_button_evt m1k_hal_button_evt_t;
 
-typedef void (*m1k_hal_button_callback_t)(m1k_hal_button_t, m1k_hal_button_evt_t);
+typedef void (*m1k_hal_button_callback_t)(m1k_hal_button_t,
+                                          m1k_hal_button_evt_t);
 typedef void (*m1k_hal_encoder_callback_t)(int);
 
-m1k_hal_err_t m1k_hal_register_button_cb(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
+m1k_hal_err_t m1k_hal_register_button_cb(m1k_hal_button_t button,
+                                         m1k_hal_button_callback_t cb);
 m1k_hal_err_t m1k_hal_register_encoder_change(m1k_hal_encoder_callback_t cb);
-
 
 //=== PRESSURE READING
 
@@ -77,22 +80,20 @@ m1k_hal_err_t m1k_hal_register_encoder_change(m1k_hal_encoder_callback_t cb);
  */
 double m1k_hal_get_pressure_reading(void);
 
-
 //=== RJ ABSTRACTION
 
 enum m1k_hal_accessory_mode {
-    M1K_HAL_ACCESSORY_DISABLED,
-    M1K_HAL_ACCESSORY_SLAVE,
-    M1K_HAL_ACCESSORY_MASTER,
+  M1K_HAL_ACCESSORY_DISABLED,
+  M1K_HAL_ACCESSORY_SLAVE,
+  M1K_HAL_ACCESSORY_MASTER,
 };
 
 typedef enum m1k_hal_accessory_mode m1k_hal_accessory_mode_t;
 
 m1k_hal_err_t m1k_hal_set_accessory_mode(m1k_hal_accessory_mode_t mode);
-size_t m1k_hal_accessory_read_buffer(char* buffer, size_t buf_len);
-size_t m1k_hal_accessory_write_buffer(char* buffer, size_t buf_len);
+size_t m1k_hal_accessory_read_buffer(char *buffer, size_t buf_len);
+size_t m1k_hal_accessory_write_buffer(char *buffer, size_t buf_len);
 void m1k_hal_accessory_reset_tx_fifo(void);
-
 
 //=== DISPLAY
 
@@ -119,10 +120,10 @@ uint8_t m1k_hal_get_milker_speed(void);
 //=== Pressure Management
 
 enum m1k_hal_air_direction {
-    M1K_HAL_AIR_OUT,
-    M1K_HAL_AIR_IN,
-    M1K_HAL_AIR_CLOSED,
-    M1K_HAL_AIR_CHAOS,
+  M1K_HAL_AIR_OUT,
+  M1K_HAL_AIR_IN,
+  M1K_HAL_AIR_CLOSED,
+  M1K_HAL_AIR_CHAOS,
 };
 
 typedef enum m1k_hal_air_direction m1k_hal_air_direction_t;

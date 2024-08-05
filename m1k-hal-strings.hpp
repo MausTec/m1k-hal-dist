@@ -30,6 +30,7 @@ static const char *m1k_hal_button_str[] = {
     "M1K_HAL_BUTTON_BOOT",
     "M1K_HAL_BUTTON_AIROUT",
     "M1K_HAL_BUTTON_AIRIN",
+    "M1K_HAL_BUTTON_PAIR",
 };
 
 /**
