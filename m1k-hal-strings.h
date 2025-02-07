@@ -12,6 +12,7 @@ static const char *m1k_hal_err_str[] = {
     "M1K_HAL_ERR_HARDWARE_LOCKED",
     "M1K_HAL_ERR_NO_STORAGE",
     "M1K_HAL_ERR_NO_FEATURE",
+    "M1K_HAL_ERR_ESP_BASE",
 };
 
 /**

@@ -16,6 +16,16 @@ extern "C" {
             ESP_LOGE(TAG, "%s returned %s", #statement, m1k_hal_err_str[__err_]);                  \
     }
 
+#define RETURN_ESP_ERR(err)                                                                        \
+    {                                                                                              \
+        if (ESP_OK != err) {                                                                       \
+            ESP_LOGE(TAG, "%s", esp_err_to_name(err));                                             \
+            return M1K_HAL_ERR_ESP_BASE + err;                                                     \
+        } else {                                                                                   \
+            return M1K_HAL_OK;                                                                     \
+        }                                                                                          \
+    }
+
 //=== COMMON
 
 enum m1k_hal_err {
@@ -24,6 +34,7 @@ enum m1k_hal_err {
     M1K_HAL_ERR_HARDWARE_LOCKED,
     M1K_HAL_ERR_NO_STORAGE,
     M1K_HAL_ERR_NO_FEATURE,
+    M1K_HAL_ERR_ESP_BASE = 0x2000
 };
 
 typedef enum m1k_hal_err m1k_hal_err_t;
