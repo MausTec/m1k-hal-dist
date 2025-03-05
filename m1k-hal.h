@@ -156,6 +156,9 @@ typedef void (*m1k_hal_fault_handler_t)(void);
 void m1k_hal_register_fault_handler(m1k_hal_fault_handler_t cb);
 void m1k_hal_fault_clear(void);
 
+//=== System Power
+void m1k_hal_master_power_off(void);
+
 #ifdef __cplusplus
 }
 #endif
