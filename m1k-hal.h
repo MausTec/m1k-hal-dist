@@ -79,6 +79,8 @@ typedef void (*m1k_hal_encoder_callback_t)(int);
 
 m1k_hal_err_t m1k_hal_register_button_cb(m1k_hal_button_t button, m1k_hal_button_callback_t cb);
 m1k_hal_err_t m1k_hal_register_encoder_change(m1k_hal_encoder_callback_t cb);
+m1k_hal_err_t m1k_hal_set_button_brightness(m1k_hal_button_t button, uint8_t brightness,
+                                            int fade_ms);
 
 //=== PRESSURE READING
 
