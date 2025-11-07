@@ -6,6 +6,7 @@ extern "C" {
 #endif
 
 #include "u8g2.h"
+#include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -44,6 +45,30 @@ enum m1k_hal_hardware_type {
 };
 
 typedef enum m1k_hal_hardware_type m1k_hal_hardware_type_t;
+
+//=== DEVICE IDENTITY TYPES
+
+// Product types (stored in eFuses)
+typedef enum m1k_hal_product_type {
+    M1K_HAL_PRODUCT_M1K = 1,
+    M1K_HAL_PRODUCT_TRMCTL = 2,
+} m1k_hal_product_type_t;
+
+// Hardware revision stages (3-bit field in eFuses)
+typedef enum m1k_hal_revision_stage {
+    M1K_HAL_REV_PROTOTYPE = 0, // Prototype boards
+    M1K_HAL_REV_EVT = 1,       // Engineering Validation Test
+    M1K_HAL_REV_DVT = 2,       // Design Validation Test
+    M1K_HAL_REV_PVT = 3,       // Production Validation Test
+    M1K_HAL_REV_MP = 4,        // Mass Production
+    M1K_HAL_REV_MAX = 7        // Maximum value (3-bit field)
+} m1k_hal_revision_stage_t;
+
+// Complete hardware revision information
+typedef struct m1k_hal_revision {
+    m1k_hal_revision_stage_t stage : 3; // Current stage (proto/evt/dvt/pvt/mp)
+    uint8_t revision : 5;                // Incremental revision number within stage (0-31)
+} m1k_hal_revision_t;
 
 m1k_hal_hardware_type_t m1k_hal_get_hardware_type(void);
 const char* m1k_hal_get_version(void);
@@ -124,9 +149,15 @@ int m1k_hal_get_display_left(void);
 void m1k_hal_send_display_screenshot(const char* label);
 void m1k_hal_set_display_backlight(uint8_t brightness);
 
-//=== EEPROM
+//=== EEPROM or eFuse
+// Read-Only access to device identity stored in eFuses or EEPROM
+// Prefers eFuse implementation, falls back to EEPROM for legacy devices
 
+m1k_hal_err_t m1k_hal_get_device_product(m1k_hal_product_type_t* dst);
+m1k_hal_err_t m1k_hal_get_device_revision(m1k_hal_revision_t* dst);
 m1k_hal_err_t m1k_hal_get_device_serial(char* dst, size_t len);
+m1k_hal_err_t m1k_hal_get_device_mfg_date(uint32_t* dst);
+m1k_hal_err_t m1k_hal_is_device_identity_programmed(bool* dst);
 
 //=== Milker Control
 
